@@ -1,87 +1,81 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <title>Loading...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ঈদ স্পেশাল অফার | Daraz</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: #000;
-      font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff8f0;
+      text-align: center;
+      padding: 20px;
     }
-    .spinner {
-      border: 8px solid #333;
-      border-top: 8px solid #fff;
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      animation: spin 1s linear infinite;
-      margin-bottom: 20px;
+    .logo {
+      max-width: 150px;
+      margin-bottom: 10px;
     }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .offer-box {
+      background: #fff;
+      border: 2px solid #ff6600;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
     }
-    p {
-      font-size: 18px;
-      color: #fff;
+    button {
+      background: #ff6600;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+    .share-btn {
+      background-color: #007bff;
     }
   </style>
 </head>
 <body>
-  <div class="spinner"></div>
-  <p>Loading... Please wait</p>
+  <img src="https://i.ibb.co/ZxXhhBz/daraz-logo.png" alt="Daraz Logo" class="logo">
+  <div class="offer-box">
+    <h2>🎉 ঈদ স্পেশাল ফ্রি অফার 🎉</h2>
+    <p>এই ঈদে দারাজ দিচ্ছে ১০০০টি <strong>Samsung S24</strong> এবং ১০০টি <strong>R15</strong> একদম ফ্রি!</p>
+    <p>আপনি কি অংশগ্রহণ করতে চান?</p>
+    <button onclick="acceptOffer()">হ্যাঁ</button>
+    <button onclick="window.location.href='https://www.daraz.com.bd'">না</button>
+
+    <div id="conditions" class="hidden">
+      <p>✅ আপনি অংশগ্রহণ করেছেন।</p>
+      <p>📍 আপনার বর্তমান অবস্থান: <strong>#১৪৮০</strong></p>
+      <p>🔄 যত বেশি শেয়ার করবেন, তত বেশি এগিয়ে যাবেন!</p>
+      <p>👉 অন্তত ১০ জন বন্ধুকে শেয়ার করুন অংশগ্রহণ নিশ্চিত করতে।</p>
+      <button class="share-btn" onclick="shareOffer()">শেয়ার করুন</button>
+      <button onclick="window.location.href='https://www.daraz.com.bd'">✅ শেয়ার করেছি</button>
+    </div>
+  </div>
 
   <script>
-    const adLinks = [
-      "https://www.profitableratecpm.com/qfjm70vdi?key=ca96700e8ffdb71988d50fc574c134c4",
-      "https://www.profitableratecpm.com/c0rzkaxg?key=60e9ffa06e385f944fedc960922f273c",
-      "https://www.profitableratecpm.com/ptkfameg0?key=962252b65034826dde7da9f5cd593e47",
-      "https://www.profitableratecpm.com/is95600r?key=b72de3e2bc634b426ffade5b44915672",
-      "https://www.profitableratecpm.com/fjh55qwrj?key=a243e7179240725bc21cce30b6ab896b",
-      "https://www.profitableratecpm.com/fjh55qwrj?key=a243e7179240725bc21cce30b6ab896b",
-      "https://www.profitableratecpm.com/c2bkz6dyj?key=2496fa2a27e182e54ff6f935629e5d0e",
-      "https://www.profitableratecpm.com/ut2fj0ij5?key=431ac4487f149c133ed320ff8f11185e",
-      "https://www.profitableratecpm.com/j1qprcy4h0?key=9a2bd14b70fd57891403ba33409fcda6",
-      "https://www.profitableratecpm.com/ccm98d00?key=b23e3d90b06d73faca72bf713825801d"
-    ];
-
-    const redirectURL = "https://www.profitableratecpm.com/u9uinu2tx4?key=2bd27e9fb780cb9d5b7bbaa7d6e7e5bc";
-    let index = 0;
-
-    function fireImpression(link) {
-      const iframe = document.createElement("iframe");
-      iframe.src = link;
-      iframe.style.display = "none";
-      document.body.appendChild(iframe);
+    function acceptOffer() {
+      document.getElementById('conditions').classList.remove('hidden');
     }
 
-    function loadAds() {
-      if (index < adLinks.length) {
-        fireImpression(adLinks[index]);
-        index++;
-        setTimeout(loadAds, 1000);
+    function shareOffer() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'ঈদ স্পেশাল দারাজ অফার',
+          text: 'দারাজ দিচ্ছে ফ্রি Samsung S24 এবং R15! দ্রুত অংশগ্রহণ করুন!',
+          url: window.location.href
+        });
       } else {
-        setTimeout(() => {
-          window.location.href = redirectURL;
-        }, 1000);
+        alert('আপনার ব্রাউজারে শেয়ার সাপোর্ট নেই। এই লিংকটি কপি করে শেয়ার করুন: ' + window.location.href);
       }
     }
-
-    history.pushState(null, "", location.href);
-    window.addEventListener("popstate", function () {
-      location.href = redirectURL;
-    });
-
-    window.onload = loadAds;
   </script>
 </body>
 </html>
